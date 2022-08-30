@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+       <nav class="bigScreen" id="home">
+           <h2 class="header">TOOBAD Technologies</h2>
+           <ul>
+            <!-- <li><a href="#">Home</a></li> -->
+            <li><a href="#works">Our Works</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact us</a></li>
+           </ul>
+       </nav>
+
+    <nav class="smallScreen" id="smallHome">
+        <h2 class="header">TOOBAD Technologies</h2>
+        <ul class="s">
+         <!-- <li><a href="#">Home</a></li> -->
+         <li><a href="#works">Our Works</a></li>
+         <li><a href="#reviews">Reviews</a></li>
+         <li><a href="#contact">Contact us</a></li>
+        </ul>
+
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+    <!-- First Section -->
+
+     <section class="first"  >
+         <article>
+           <p class="intro"> Welcome to  <h3> TOOBAD Technologies</h3> Why Us? <span class="offers"> </span> </p> 
+         </article>
+
+        <div> <a href="#" class="joinUsToday">Join Us Today</a> </div>
+        
+     </section>
+
+     <!-- Second Section -->
+
+     <section class="second" id="works">
+
+        <h2 class="ourWorks">Our Works</h2>
+        <article class="ourWorks">
+            <img src="images/first (3).jpg"  class="works fade" alt="">
+            <img src="images/first (1).jpg" class="works fade"  alt="">
+            <img src="images/2-start-simple.jpg" class="works fade"  alt="">
+        </article>
+     </section>
+
+   <!-- Third Section -->
+
+
+   <section class="third" id="reviews">
+    
+        <h1 class="reviews">Our Reviews</h1>
+        <article class="review">
+            <div class="img-container">
+             <img src="images/user-1.png" alt="user-1" id="person-img">
+              </div>
+  
+              <h4 id="author"></h4>
+              <p id="job"></p>
+              <p id="info"></p>
+  
+              <!--Buttons-->
+         <div class="button-container">
+              <button class="prev-btn">
+                  &lt;
+              </button>
+  
+              <button class="next-btn">
+                  &gt;
+              </button>
+         </div>
+         <select></select>
+          <button class="translateBtn">Translate</button>
+         
+   </section>
+        <!-- Fourth Section -->
+        <section class="fourth" id="contact">
+           <h2> Contact Us</h2>
+     <form action="#" method="post">
+        <article>
+            <div class="form-group">
+                <input required type="text" placeholder="Fullname">
+            </div>
+             
+            <div class="form-group">
+                <input required type="email" placeholder="Email">
+            </div>
+
+           <div class="form-group">
+            <textarea required placeholder="Kindly Express your mind"></textarea>
+           </div>
+              
+           <button type="submit">Send Message</button>
+        </article>   
+
+       </form>
+
+        </section>
+
+       <!-- Join us Now -->
+        <a  class="joinUsNow" href="#">Join Us Now</a>
+     
+        <!-- BACK TO TOP -->
+        <a  class="scrollUp" id="bigArrow" href="#home"><img  width="60px" src="images/arrow-up.png" ></a>
+        
+        <a  class="smallScrollUp" id="smallArrow" href="#smallHome"><img width="60px" src="images/arrow-up.png" ></a>
+               
+         <!-- Footer -->
+
+        <footer>
+            <div>TOOBAD Technologies</div>
+            <div>&copy; <span id="year"></span> </div>
+        </footer>
+
+</div>
+
+    <script src="main.js"></script>
+</body>
+</html>
