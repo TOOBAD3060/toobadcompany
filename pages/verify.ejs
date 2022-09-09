@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="verify">
+  <div class="container verify">
+    <article>
+        <img src="/images/checked.png"  width="50px">
+        <h2 class="header">Verify your Account</h2>
+        <p>We have sent the Verification Code to your email</p>
+    </article>
+<form action="" class="verifyForm">
+  <section class="verificationCode">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="fir" onkeyup="setFocus(this,'sec')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="sec" onkeyup="setFocus(this,'thir')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="thir" onkeyup="setFocus(this,'four')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="four" onkeyup="setFocus(this,'fif')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="fif" onkeyup="setFocus(this,'six')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="six" onkeyup="setFocus(this,'fir')">
+   </section>
+
+   <button class="verifyBtn" id="verifyBtn" type="submit" >Verify</button>
+</form>
+<div class="popUp">
+    <p>oops.. successfully verfied Lorem ipsum dolor sit amet consectetur adipi </p>
+     <a href="login.html">Proceed to Login</a>
+ </div>
+ 
+</div>
+
+<script src="/js/verify.js"></script>
+</body>
+</html>
