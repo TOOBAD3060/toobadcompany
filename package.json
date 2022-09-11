@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/TOOBAD3060/full_stack_company_project/issues"
   },
-  "homepage": "https://github.com/TOOBAD3060/full_stack_company_project#readme"
+  "homepage": "https://github.com/TOOBAD3060/full_stack_company_project#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.0.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-ejs-layouts": "^2.5.1",
+    "mongoose": "^6.6.0",
+    "nodemailer": "^6.7.8"
+  }
 }

@@ -59,10 +59,10 @@ signUpForm.addEventListener("submit",function(e){
        displayPasswordDoesNotMatch("Password doesn't match")
 
           }
-    else{
-      e.preventDefault();
-        window.location.href="/pages/verify.ejs"
-    }
+    // else{
+    //   e.preventDefault();
+    //     window.location.href="/pages/verify.ejs"
+    // }
 
 })
 
