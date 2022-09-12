@@ -14,6 +14,11 @@ const verifyForm=document.querySelector(".verifyForm")
   //    verifyForm.classList.add("disable");
   // })
 
+  const flashMessage = document.querySelector(".flash-message");
+
+setTimeout(()=>{
+  flashMessage.textContent=""
+},3000)
 
   function setFocus(first,last) {
     if(first.value){

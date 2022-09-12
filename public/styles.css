@@ -226,3 +226,9 @@ p.sensitive{
     cursor: pointer;
 }
 
+/* Partial/message.ejs */
+
+.flash-message{
+    color: red;
+    font-style: italic;
+}

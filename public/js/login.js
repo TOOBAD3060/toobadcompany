@@ -1,5 +1,11 @@
 // Login Page
 
+const flashMessage = document.querySelector(".flash-message");
+
+setTimeout(()=>{
+  flashMessage.textContent=""
+},3000)
+
 // user password visibility
 const loginPassword=document.querySelector("#userPassword");
 const loginShowIcon=document.querySelector(".loginShowIcon");

@@ -50,20 +50,20 @@ const transporter = nodeMailer.createTransport({
 
 //          User Routes
 //  Handling get request
-let mailExistence;
+let confirmation;
 app.get("/",(req,res)=>{
  res.render("index")
 })
 
 app.get("/login",(req,res)=>{
-    res.render("login")
+    res.render("login",{confirmation})
 })
 
 app.get("/verify",(req,res)=>{
-  res.render("verify")    
+  res.render("verify",{confirmation})    
 })
 app.get("/signUp",(req,res)=>{
-  res.render("signUp",{mailExistence})
+  res.render("signUp",{confirmation})
 })
 
 
@@ -72,13 +72,33 @@ app.get("/signUp",(req,res)=>{
 
 //  Handling post request to Signup
 app.post("/signUp",(req,res)=>{
+
+    //  Creating Random Token
+const possibleValues = [0,1,2,3,4,5,6,7,8,9];
+
+
+
+
+let randomToken="";
+for(let i = 0;i<6;i++){
+    const randomNumber = getRandomNumber();
+    randomToken += possibleValues[randomNumber]
+}
+
+function getRandomNumber(){
+  return Math.floor(Math.random()*possibleValues.length)
+
+}
+
+console.log(randomToken)
+
     
     const {firstName,lastName,email,password} = req.body;
   User.findOne({email},(err,foundMail)=>{
     if(foundMail){
         // res.send("Email is already registered");
         
-        res.render("signUp",{mailExistence : "Email is already registered"})
+        res.render("signUp",{confirmation : "Email is already registered"})
     }
     else{
    
@@ -89,14 +109,14 @@ app.post("/signUp",(req,res)=>{
                 lastName,
                 email,
                 password:hash,
-                emailToken:Math.floor(Math.random()*999999),
+                emailToken:randomToken,
                 isVerified: false
             })
     
             newUser.save((err)=>{
                 if(err){
                     console.log(err)
-                    res.redirect("/login")
+                    // res.redirect("/login")
                 }
                 else{
                     console.log("New User Saved")
@@ -136,25 +156,86 @@ app.post("/login",(req,res)=>{
         if(err){console.log(err)}
         else{
             if(foundMail){
-                bcrypt.compare(password,foundMail.password,(error,result)=>{
-                    if(error){
-                        console.log(err)
-                    }
-                    if(result){
-                        res.render("profile")
-                    }
-                    else{
-                        res.send("Incorrect password")
-                    }
-                })
+                if(!foundMail.isVerified){
+                    res.render("login",{confirmation:"Email not verified"})
+                }
+                else{
+                    bcrypt.compare(password,foundMail.password,(error,result)=>{
+                        if(error){
+                            console.log(err)
+                        }
+                        
+                        if(result){
+                            res.render("profile")
+                        }
+                        else{
+                            res.render("login",{confirmation:"Incorrect Password"})
+
+                        }
+                    })
+                }
+
+                
             }
             else{
-                res.send("Email not registered")
+                res.render("login",{confirmation:"Email not registered"})
+
             }
             
         }
     })
 })
+
+// Contact Model
+const Contact = require("./contactModel")
+
+// Handling post request root route>> contact us 
+app.post("/contactUs",(req,res)=>{
+ const {fullName,email,message} =   req.body
+
+ const newMessage = new Contact({
+    fullName,
+    email,
+    message
+ })
+  newMessage.save((err)=>{
+    if(!err){
+        console.log("New Message Saved")
+        res.redirect("/")
+    }
+  })
+})
+
+//  Handling post request to verification route
+
+app.post("/verify",(req,res)=>{
+    const {first,second,third,fourth,fifth,sixth} = req.body;
+    const token = `${first}${second}${third}${fourth}${fifth}${sixth}`
+    console.log(token)
+    User.findOne({emailToken:token},(err,foundUser)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            if(foundUser){
+                foundUser.emailToken = null;
+                foundUser.isVerified = true;
+
+                foundUser.save((err)=>{
+                    if(!err){
+                        console.log("New changes made")
+                        res.render("verificationSuccess")
+                    }
+                })
+            }
+            else{
+                res.render("verify",{confirmation: "Kindly fill in the correct code"})
+            }
+        }
+    })
+})
+
+
 
 app.listen(process.env.PORT || 4000,()=>{
     console.log("server started on port 4000")

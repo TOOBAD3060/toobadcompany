@@ -13,15 +13,18 @@
         <img src="/images/checked.png"  width="50px">
         <h2 class="header">Verify your Account</h2>
         <p>We have sent the Verification Code to your email</p>
+
+        <%- include("./partials/messages") -%>
+
     </article>
 <form action="/verify" class="verifyForm" method="post">
   <section class="verificationCode">
-    <input autofocus required class="verify" type="text" minlength="1" maxlength="1" name="" id="fir" onkeyup="setFocus(this,'sec')">
-    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="sec" onkeyup="setFocus(this,'thir')">
-    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="thir" onkeyup="setFocus(this,'four')">
-    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="four" onkeyup="setFocus(this,'fif')">
-    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="fif" onkeyup="setFocus(this,'six')">
-    <input required class="verify" type="text" minlength="1" maxlength="1" name="" id="six" onkeyup="setFocus(this,'fir')">
+    <input autofocus required class="verify" type="text" minlength="1" maxlength="1" name="first" id="fir" onkeyup="setFocus(this,'sec')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="second" id="sec" onkeyup="setFocus(this,'thir')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="third" id="thir" onkeyup="setFocus(this,'four')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="fourth" id="four" onkeyup="setFocus(this,'fif')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="fifth" id="fif" onkeyup="setFocus(this,'six')">
+    <input required class="verify" type="text" minlength="1" maxlength="1" name="sixth" id="six" onkeyup="setFocus(this,'fir')">
    </section>
 
    <button class="verifyBtn" id="verifyBtn" type="submit" >Verify</button>

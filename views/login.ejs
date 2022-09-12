@@ -10,13 +10,15 @@
 <body>
     <div class="container">
          <h2 class="header">Welcome Back</h4>
+         <%- include("./partials/messages") -%>
+
       <form action="/login" method="post">
          <div class="form-group-mobile">
-             <input type="email" id="userMail" placeholder="Email" required>
+             <input name="email" type="email" id="userMail" placeholder="Email" required>
              <img class="emailValid js" src="/images/checked.png" width="20px">
         </div>
          <div class="form-group-mobile">
-             <input class="loginPassword" type="password" required id="userPassword" placeholder="Password">
+             <input name="password" class="loginPassword" type="password" required id="userPassword" placeholder="Password">
              <img class="loginShowIcon js" src="/images/show.png" width="20px">
             </div>
          <div class="remForgot">

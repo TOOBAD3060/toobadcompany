@@ -13,6 +13,12 @@ const secondTimeVisibility=document.querySelector(".secondTime")
 const nextBtn= document.getElementById("next");
 
 
+//  partial/message.ejs
+const flashMessage = document.querySelector(".flash-message");
+
+setTimeout(()=>{
+  flashMessage.textContent=""
+},3000)
 
 
 
@@ -83,6 +89,8 @@ doesNotMatch.textContent=text;
 
   },2000)
 }
+
+
 
 //  show password icons
 

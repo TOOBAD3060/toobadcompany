@@ -147,23 +147,23 @@ fetch(apiUrl).then(res=> res.json()).then(data =>{
     window.addEventListener("scroll",function(){
     
         const scrollHeight= window.pageYOffset;
-        const joinUsBtn= document.querySelector(".joinUs");
+        // const joinUsBtn= document.querySelector(".joinUs");
         const nav=document.querySelector("nav");
         const navHeight = nav.getBoundingClientRect().height;
         const backToTopBtn= document.querySelector(".backToTop")
         const width500Top=this.document.querySelector(".width500Top");
 
-if (scrollHeight > navHeight) {
+// if (scrollHeight > navHeight) {
 
-    joinUsBtn.classList.add("show-link")
-    nav.classList.add("fixed-nav")
+//     // joinUsBtn.classList.add("show-link")
+//     nav.classList.add("fixed-nav")
     
-}
-else{
-    joinUsBtn.classList.remove("show-link")
-    document.querySelector("nav").classList.remove("fixed-nav")
+// }
+// else{
+//     joinUsBtn.classList.remove("show-link")
+//     document.querySelector("nav").classList.remove("fixed-nav")
 
-}
+// }
 if (scrollHeight > 300) {
     backToTopBtn.classList.add("show-link")
     width500Top.classList.add("active")
