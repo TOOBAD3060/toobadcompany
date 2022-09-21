@@ -20,11 +20,12 @@ nav{
     justify-content: space-between;
     align-items: center;
     height: 60px;
+    user-select: none;
     /* background-color: dodgerblue; */
 }
 
 nav h2{
-    color: gray;
+    color: darkblue;
     font-size: 25px;
 }
 
@@ -40,13 +41,14 @@ nav ul li{
 nav ul li a{
   text-decoration: none;
   text-transform: uppercase;
-  color: silver;
+  color: deepskyblue;
   font-weight: 400;
 }
                 /* First Section */
 section.first{
     margin-top: 50px;
     height: 350px;
+    user-select: none;
 }
 
 section.first article{
@@ -55,12 +57,12 @@ section.first article{
      font-size: 30px;
      left: 80px;
      line-height: 40px;
-     color: darkslategrey;
+     color: grey;
 }
 
 section.first .offers{
   position: relative;
-  animation: upward 5s infinite;
+  animation: upward 4s infinite;
 }
 
 @keyframes upward {
@@ -68,24 +70,24 @@ section.first .offers{
         top: 0;
         opacity: 0;
     }
-    20%{
-        top: -10px;
+    30%{
+        top: -7px;
         opacity: 0.8;
     }
-    40%{
-        top: -15px;
+    /* 60%{
+        top: -11px;
         opacity: 0.6;
-    }
+    } */
     60%{
-        top: -20px;
+        top: -15px;
         opacity: 0.4;
     }
     80%{
-        top: -25px;
+        top: -20px;
         opacity: 0.2;
     }
     100%{
-        top: -30px;
+        top: -23px;
         opacity: 0;
     }
 }
@@ -95,7 +97,7 @@ section.first .joinUsToday{
      top: 80px;
      left: 80px;
      border-radius: 10px;
-     background: grey;
+     background: darkblue;
      padding: 15px 25px;
      text-decoration: none;
      color: white;
@@ -104,8 +106,8 @@ section.first .joinUsToday{
      transition: all 2s;
     }
     section.first .joinUsToday:hover{
-        background-color: white;
-        color: grey;
+        background-color: silver;
+        color: darkblue;
     }
 
 /* Second Section */
@@ -118,7 +120,7 @@ h2.ourWorks{
     border-radius: 10px;
     text-align: center;
     color: #fff;
-    background-color: dimgray;
+    background-color: darkslategrey;
     padding: 10px 0;
     margin-bottom: 20px;
 }
@@ -147,6 +149,7 @@ section.third{
     margin:  20px;
     background-color: darkslategray;
     border-radius: 10px 20px;
+    user-select: none;
 }
 
 h1.reviews{
@@ -164,7 +167,7 @@ article.review{
 }
 p#info{
     padding: 20px;
-    color: wheat;
+    color: skyblue
 }
 
 #author{
@@ -201,6 +204,7 @@ select option{
 
 section.fourth{
     margin: 0 20px;
+    user-select: none;
 }
 
 section.fourth h2{
@@ -401,16 +405,19 @@ nav.smallScreen  .hamburger.active .bar:nth-child(3){
 
 @media (max-width:500px) {
 
+
     nav h2{
         font-size: 20px;
     }
+     
+
     section.first article{
         font-size: 20px;
         left: 30px;
          line-height: 30px;
     }
    section.first .offers{
-        font-size: 20px;
+        font-size: 18px;
     }
     section.first .joinUsToday{
         top: 80px;

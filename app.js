@@ -7,6 +7,9 @@ const bcrypt= require("bcrypt")
 const saltRounds= 10;
 const nodeMailer= require("nodemailer")
 const flash = require("connect-flash")
+const session= require("express-session");
+const passport = require("passport");
+
 
 mongoose.connect(process.env.CONNECT_KEY,{useNewUrlParser : true},(err)=>{
     if(!err){
@@ -18,19 +21,36 @@ mongoose.connect(process.env.CONNECT_KEY,{useNewUrlParser : true},(err)=>{
 })
 
 const app = express();
+
+//Passport config
+require("./config/passport")(passport)
+
 app.set("view engine","ejs")
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended:true}))
 
+
+// express session
+app.use(session({
+    secret: "keyboard cat",
+    resave:true,
+    saveUninitialized:true
+}))
+
+// passporrt middleware
+app.use(passport.initialize());
+app.use(passport.session())
+
+
 // Connect flash
-// app.use(flash());
+app.use(flash());
 // Global vars
-// app.use((req,res,next)=>{
-//     res.locals.success_msg=req.flash("success_msg")
-//     res.locals.error_msg=req.flash("error_msg")
-//     res.locals.error=req.flash("error")
-//     next();
-// })
+app.use((req,res,next)=>{
+    res.locals.success_msg=req.flash("success_msg")
+    res.locals.error_msg=req.flash("error_msg")
+    res.locals.error=req.flash("error")
+    next();
+})
 
 //  User Model
 const User = require("./userModel");
@@ -55,9 +75,19 @@ app.get("/",(req,res)=>{
  res.render("index")
 })
 
+const {ensureAuthenticated}=require("./config/auth")
+
+
+// Dashboard
+app.get("/dashboard",ensureAuthenticated,(req,res)=>{
+    res.render("dashboard",{name:req.user.firstName})
+})
+
+
 app.get("/login",(req,res)=>{
     res.render("login",{confirmation})
 })
+
 
 app.get("/verify",(req,res)=>{
   res.render("verify",{confirmation})    
@@ -66,7 +96,9 @@ app.get("/signUp",(req,res)=>{
   res.render("signUp",{confirmation})
 })
 
-
+app.get("/forgotPassword",(req,res)=>{
+    res.render("forgotPassword")
+})
 
 
 
@@ -93,18 +125,28 @@ function getRandomNumber(){
 console.log(randomToken)
 
     
-    const {firstName,lastName,email,password} = req.body;
+    const {firstName,lastName,email,password,firstPassword} = req.body;
   User.findOne({email},(err,foundMail)=>{
     if(foundMail){
         // res.send("Email is already registered");
         
-        res.render("signUp",{confirmation : "Email is already registered"})
+        res.render("signUp",
+        {
+            confirmation : "Email is already registered",
+            firstName,
+            lastName,
+            email,
+            firstPassword,
+            password,
+            
+        })
     }
     else{
    
         bcrypt.hash(password,saltRounds,(err,hash)=>{
 
             const newUser= new User({
+                username:email,
                 firstName,
                 lastName,
                 email,
@@ -116,28 +158,28 @@ console.log(randomToken)
             newUser.save((err)=>{
                 if(err){
                     console.log(err)
-                    // res.redirect("/login")
+                    // res.redirect("/signUp")
                 }
                 else{
                     console.log("New User Saved")
                     const mailOptions = {
-                        from : ` "Verify your email" <olalerebabatunde2000@gmail.com>` ,
-                        to : newUser.email,
-                        subject : 'TOOBAD Technologies - Verify your email' ,
+                         from : ` "Verify your email" <olalerebabatunde2000@gmail.com>` ,
+                         to : newUser.email,
+                         subject : 'TOOBAD Technologies - Verify your email' ,
                          text:` Dear ${newUser.lastName}, Kindly use ${newUser.emailToken} for your verification`
                         }
             
-            //  Sending Mail
+            //   Sending Mail
             transporter.sendMail(mailOptions,(error,info)=>{
-                if(error){
-             console.log(error)
-                }
-                else{
-                    console.log("Verification email is sent to your mail")
-                }
-            })
-        }
-            res.redirect("/verify")
+                 if(error){
+              console.log(error)
+                 }
+                 else{
+                     console.log("Verification email is sent to your mail")
+                 }
+             })
+             res.redirect("/verify")
+         }
             })
     
         })
@@ -147,44 +189,69 @@ console.log(randomToken)
 
 })
 
+// login handle
+app.post("/login",(req,res,next)=>{
+    
+    passport.authenticate("local",{
+        successRedirect: "/dashboard",
+        failureRedirect:"/login",
+        failureFlash:true
+    })(req,res,next)
+})
+
+
+//logout hande
+
+app.get("/logout",(req,res)=>{
+    req.logout((err)=>{
+        if(!err){
+            // req.flash("success_msg","You're logged out")
+            res.redirect("/login")
+        }
+    });
+   
+})
+
+
+
 //Handling Post request to login route
 
-app.post("/login",(req,res)=>{
-    const {email,password} = req.body;
+// app.post("/login",(req,res)=>{
+//     const {email,password} = req.body;
 
-    User.findOne({email},(err,foundMail)=>{
-        if(err){console.log(err)}
-        else{
-            if(foundMail){
-                if(!foundMail.isVerified){
-                    res.render("login",{confirmation:"Email not verified"})
-                }
-                else{
-                    bcrypt.compare(password,foundMail.password,(error,result)=>{
-                        if(error){
-                            console.log(err)
-                        }
+//     User.findOne({email},(err,foundMail)=>{
+//         if(err){console.log(err)}
+//         else{
+//             if(foundMail){
+//                 if(!foundMail.isVerified){
+//                     res.render("login",{confirmation:"Email not verified"})
+//                 }
+//                 else{
+//                     bcrypt.compare(password,foundMail.password,(error,result)=>{
+//                         if(error){
+//                             console.log(err)
+//                         }
                         
-                        if(result){
-                            res.render("profile")
-                        }
-                        else{
-                            res.render("login",{confirmation:"Incorrect Password"})
+//                         if(result){
+//                             res.render("profile")
+//                         }
+//                         else{
+//                             res.render("login",{confirmation:"Incorrect Password"})
 
-                        }
-                    })
-                }
+//                         }
+//                     })
+//                 }
 
                 
-            }
-            else{
-                res.render("login",{confirmation:"Email not registered"})
+//             }
+//             else{
+//                 res.render("login",{confirmation:"Email not registered"})
 
-            }
+//             }
             
-        }
-    })
-})
+//         }
+//     })
+// })
 
 // Contact Model
 const Contact = require("./contactModel")
@@ -196,7 +263,11 @@ app.post("/contactUs",(req,res)=>{
  const newMessage = new Contact({
     fullName,
     email,
-    message
+    message,
+    date:{
+        type: Date,
+        default:Date.now()
+    }
  })
   newMessage.save((err)=>{
     if(!err){
@@ -236,6 +307,9 @@ app.post("/verify",(req,res)=>{
 })
 
 
+app.get("/verificationSuccess",(req,res)=>{
+    res.render("verificationSuccess")
+})
 
 app.listen(process.env.PORT || 4000,()=>{
     console.log("server started on port 4000")

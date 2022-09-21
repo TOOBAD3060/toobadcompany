@@ -226,4 +226,4 @@ shamburger.addEventListener('click',function(){
     showMenu.classList.toggle('active');
 })
 
-Footer
+

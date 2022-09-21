@@ -6,6 +6,8 @@ setTimeout(()=>{
   flashMessage.textContent=""
 },3000)
 
+
+
 // user password visibility
 const loginPassword=document.querySelector("#userPassword");
 const loginShowIcon=document.querySelector(".loginShowIcon");
@@ -44,6 +46,14 @@ const inputCheckBox=document.getElementById("remember");
 
 rememberMeText.addEventListener("click",()=>{
 
- inputCheckBox.toggleAttribute("checked");
+//  inputCheckBox.toggleAttribute("checked");
+const theAttr = inputCheckBox.getAttribute("checked");
+if(theAttr){
+  inputCheckBox.removeAttribute("checked")
+}
+
+else if(!theAttr){
+  inputCheckBox.setAttribute("checked","checked")
+}
 
 })
