@@ -25,7 +25,7 @@ nav{
 }
 
 nav h2{
-    color: darkblue;
+    color: darkslateblue;
     font-size: 25px;
 }
 
@@ -41,7 +41,7 @@ nav ul li{
 nav ul li a{
   text-decoration: none;
   text-transform: uppercase;
-  color: deepskyblue;
+  color: darkslateblue;
   font-weight: 400;
 }
                 /* First Section */
@@ -57,7 +57,7 @@ section.first article{
      font-size: 30px;
      left: 80px;
      line-height: 40px;
-     color: grey;
+     /* color: grey; */
 }
 
 section.first .offers{
@@ -97,7 +97,7 @@ section.first .joinUsToday{
      top: 80px;
      left: 80px;
      border-radius: 10px;
-     background: darkblue;
+     background: darkslateblue;
      padding: 15px 25px;
      text-decoration: none;
      color: white;
@@ -120,7 +120,7 @@ h2.ourWorks{
     border-radius: 10px;
     text-align: center;
     color: #fff;
-    background-color: darkslategrey;
+    background-color: darkslateblue;
     padding: 10px 0;
     margin-bottom: 20px;
 }
@@ -147,7 +147,7 @@ img.fade{
 
 section.third{
     margin:  20px;
-    background-color: darkslategray;
+    background-color: darkslateblue;
     border-radius: 10px 20px;
     user-select: none;
 }
@@ -167,7 +167,7 @@ article.review{
 }
 p#info{
     padding: 20px;
-    color: skyblue
+    color: honeydew;
 }
 
 #author{

@@ -10,7 +10,6 @@ div.container{
     width: 350px;
     margin: 5em auto 0;
     height: 300px;
-    /* background-color: darkblue; */
     border-radius: 10px;
     text-align: center;
     box-shadow: 2px 2px 5px 0px gray;
@@ -21,7 +20,6 @@ div.container.signer{
 h2.header{
           padding: 15px;
           color: skyblue;
-
 }
 div.form-group-mobile{
     margin-bottom: 1em;
