@@ -97,7 +97,7 @@ app.get("/signUp",(req,res)=>{
 })
 
 app.get("/forgotPassword",(req,res)=>{
-    res.render("forgotPassword")
+    res.render("forgotPassword",{confirmation})
 })
 
 
@@ -213,46 +213,6 @@ app.get("/logout",(req,res)=>{
 })
 
 
-
-//Handling Post request to login route
-
-// app.post("/login",(req,res)=>{
-//     const {email,password} = req.body;
-
-//     User.findOne({email},(err,foundMail)=>{
-//         if(err){console.log(err)}
-//         else{
-//             if(foundMail){
-//                 if(!foundMail.isVerified){
-//                     res.render("login",{confirmation:"Email not verified"})
-//                 }
-//                 else{
-//                     bcrypt.compare(password,foundMail.password,(error,result)=>{
-//                         if(error){
-//                             console.log(err)
-//                         }
-                        
-//                         if(result){
-//                             res.render("profile")
-//                         }
-//                         else{
-//                             res.render("login",{confirmation:"Incorrect Password"})
-
-//                         }
-//                     })
-//                 }
-
-                
-//             }
-//             else{
-//                 res.render("login",{confirmation:"Email not registered"})
-
-//             }
-            
-//         }
-//     })
-// })
-
 // Contact Model
 const Contact = require("./contactModel")
 
@@ -272,6 +232,22 @@ app.post("/contactUs",(req,res)=>{
   newMessage.save((err)=>{
     if(!err){
         console.log("New Message Saved")
+        const mailOptions = {
+            from : ` "Acknowledgement email" <olalerebabatunde2000@gmail.com>` ,
+            to : newMessage.email,
+            subject : 'TOOBAD Technologies - Message Received' ,
+            text:` Dear ${newMessage.fullName}, We are really glad you took your precious time to reach us, we will look into your message and reply as soon as possible. THANKS`
+           }
+
+//   Sending Mail
+transporter.sendMail(mailOptions,(error,info)=>{
+    if(error){
+ console.log(error)
+    }
+    else{
+        console.log("Mail sent")
+    }
+})
         res.redirect("/")
     }
   })
@@ -307,9 +283,78 @@ app.post("/verify",(req,res)=>{
 })
 
 
-app.get("/verificationSuccess",(req,res)=>{
-    res.render("verificationSuccess")
+
+//  Handling post request to Forgot Password
+
+app.post("/forgotPassword",(req,res)=>{
+    const {email} = req.body;
+        //  Creating Random Token
+const possibleValues = [0,1,2,3,4,5,6,7,8,9];
+
+
+
+
+let randomToken="";
+for(let i = 0;i<6;i++){
+    const randomNumber = getRandomNumber();
+    randomToken += possibleValues[randomNumber]
+}
+
+function getRandomNumber(){
+  return Math.floor(Math.random()*possibleValues.length)
+
+}
+
+console.log(randomToken)
+
+User.findOne({email:email},(err,foundUser)=>{
+  if(err){
+    console.log(err)
+  }
+  else{
+    if (foundUser) {
+        bcrypt.hash(randomToken,saltRounds,(err,hash)=>{
+            foundUser.password = hash;
+        
+        
+        foundUser.save((err)=>{
+            if(!err){
+                const mailOptions = {
+                    from : ` "Acknowledgement email" <olalerebabatunde2000@gmail.com>` ,
+                    to : foundUser.email,
+                    subject : 'TOOBAD Technologies - Reset Password' ,
+                    text:`Kindly use ${randomToken} to sign in . Don't forget to change it later `
+                   }
+                
+                //   Sending Mail
+                transporter.sendMail(mailOptions,(error,info)=>{
+                if(error){
+                console.log(error)
+                }
+                else{
+                console.log("New password is sent to your mail")
+                }
+                })
+
+                res.redirect("/login")
+            }
+            else {
+                console.log(err)
+            }
+        })
+
+    })
+    }
+    else {
+        res.render("forgotPassword",{confirmation : "User does not exists"})
+    }
+  }
+  
 })
+
+
+})
+
 
 app.listen(process.env.PORT || 4000,()=>{
     console.log("server started on port 4000")

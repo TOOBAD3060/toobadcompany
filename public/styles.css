@@ -82,8 +82,8 @@ span.rememberText{
 
 /* verification page */
 div.container.verify{
-    background-color:  rgb(0, 100,100);
-    box-shadow: none;
+    background-color:  rgb(0, 150,10);
+    box-shadow: none
 }
 input.verify{
     width: 30px;
@@ -251,4 +251,14 @@ a.success{
 .flash-message{
     color: red;
     font-style: italic;
+}
+
+
+@media (max-width:400px) {
+
+    div.container{
+        
+        width: 320px;
+    }
+
 }

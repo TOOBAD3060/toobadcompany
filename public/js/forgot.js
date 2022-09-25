@@ -1,9 +1,5 @@
-const forgotForm=document.querySelector(".forgotForm");
-const popUpForgot=document.querySelector(".popUpForgot")
+const flashMessage = document.querySelector(".flash-message");
 
-forgotForm.addEventListener("submit",(e)=>{
-    e.preventDefault();
-   
-    popUpForgot.classList.add("active")
-    forgotForm.classList.add("disable")
-})
+setTimeout(()=>{
+  flashMessage.textContent=""
+},3000)
