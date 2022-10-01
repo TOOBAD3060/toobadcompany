@@ -80,7 +80,15 @@ const {ensureAuthenticated}=require("./config/auth")
 
 // Dashboard
 app.get("/dashboard",ensureAuthenticated,(req,res)=>{
-    res.render("dashboard",{name:req.user.firstName})
+    res.render("dashboard",
+    {firstName:req.user.firstName,
+     lastName: req.user.lastName,
+     email: req.user.email,
+     dateOfReg : req.user.date,
+     confirmation
+    }
+    )
+    console.log(req.user)
 })
 
 
@@ -354,6 +362,109 @@ User.findOne({email:email},(err,foundUser)=>{
 
 
 })
+
+app.post("/dashboard",(req,res)=>{
+    const {oldPassword,newPassword} = req.body;
+    
+    
+User.findOne({email:req.user.email},(err,foundUser)=>{
+  if(err){
+    console.log(err)
+    }
+
+    if(foundUser){
+        bcrypt.compare(oldPassword,foundUser.password,(err,isMatch)=>{
+            if (err) {
+             console.log(err)
+            }
+            if (isMatch) {
+                console.log("On it.......")
+                bcrypt.hash(newPassword,saltRounds,(err,hash)=>{
+                    foundUser.password = hash;
+                    foundUser.save((err)=>{
+                        
+                        if(!err){
+                            console.log("Successfully save")
+                            res.redirect("/logout")
+                        }
+                        
+                    })
+                })
+            }
+
+            else{
+                             res.render("dashboard",{firstName:req.user.firstName,
+                                 lastName: req.user.lastName,
+                                 email: req.user.email,
+                                 dateOfReg : req.user.date,
+                                 confirmation : "Oldpassword is incorrect"
+                                } )
+               }
+                
+            
+        })
+    }
+})
+
+    // bcrypt.compare(oldPassword,req.user.password,(err,isMatch)=>{
+    //     if (err){
+    //         console.log(err)
+    //     }
+    //     if (isMatch){
+
+            
+    //             User.findOne({email:req.user.email},(err,foundUser)=>{
+    //                 if(err){
+    //                     console.log(err)
+    //                 }
+    //                 if(foundUser){
+    //                  bcrypt.hash(newPassword,saltRounds,(err,hash)=>{
+    //                     foundUser.password = hash;
+    //                     foundUser.save((err)=>{
+    //                         if(!err){
+    //                             console.log("successfully change")
+    //                             res.redirect("/login")
+    //                         }
+    //                     })
+    //                  })
+    //                 }
+
+                    
+    //             })
+    //         }
+    //         else{
+    //             res.render("dashboard",{firstName:req.user.firstName,
+    //                 lastName: req.user.lastName,
+    //                 email: req.user.email,
+    //                 dateOfReg : req.user.date,
+    //                 confirmation : "Oldpassword is incorrect"
+    //                }
+    //      )
+    //         }
+                
+            // })
+        
+           
+                
+
+        
+    
+    })
+       
+        //logout hande
+
+app.get("/logout",(req,res)=>{
+    req.logout((err)=>{
+        if(!err){
+            req.flash("success_msg","You're logged out")
+            res.redirect("/login")
+        }
+    });
+   
+})
+
+        
+       
 
 
 app.listen(process.env.PORT || 4000,()=>{

@@ -1,0 +1,163 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    margin: 70px  20px 20px;
+}
+.container .header{
+    position: relative;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.container .header h2{
+    background-color: skyblue;
+    padding: 5px 10px;
+}
+.container .header img{
+    position: absolute;
+    right: 50px;
+    top: 3px;
+    /* cursor: pointer; */
+}
+
+
+.container .segments{
+    display: flex;
+}
+.container .segments .first{
+ flex: 1;
+ display: grid;
+ /* justify-content: center; */
+ align-content: space-around;
+ /* box-shadow: 2px 2px 5px 0px gray; */
+}
+
+.container .segments .first img{
+    cursor: pointer;
+}
+.container .segments .second{
+flex: 9;
+padding-left: 30px;
+}
+
+/* Profile */
+.container .segments .second .profile{
+    color: cadetblue;
+}
+.container .segments .second .profile h3{
+text-align: center;
+margin-bottom: 10px;
+text-transform: uppercase;
+}
+.container .segments .second .profile p {
+    font-size: 21px;
+    line-height: 40px;
+}
+
+/* Dashboard */
+
+.container .segments .second .dashboard{
+    color: skyblue;
+    line-height: 40px;
+}
+.container .segments .second .dashboard h3{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Settings */
+.container .segments .second .changepassword {
+    padding: 0;
+}
+
+.container .segments .second .changepassword h3{
+    text-align: center;
+    margin-bottom: 30px;
+    color: skyblue;
+}
+
+
+.changepassword form{
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+p.info {
+    text-align: center;
+    color: red;
+    font-style: italic;
+    margin-bottom: 8px;
+}
+.form-group{
+    position: relative;
+    width: 80%;
+    margin: 0 auto 1em ;
+    /* display: flex; */
+}
+.form-group img{
+    position: absolute;
+    right: 7px;
+    bottom: 7px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+input{
+    width: 100%;
+    padding: 9px;
+    box-shadow: 2px 2px 5px 0px grey;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+button{
+    padding: 10px 25px;
+    background-color: skyblue;
+    color: white;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    left: 60px;
+    border-radius: 3px;
+}
+
+/* Js Added classes */
+.visible {
+    display: block;
+}
+.invisible {
+  display: none;   
+}
+
+.form-group img.active{
+    opacity: 1;
+}
+
+
+@media (max-width:500px){
+    .container .segments .first img{
+        width: 20px;
+    }
+
+    .container .segments .second .profile p {
+        font-size: 16px;
+        line-height: 40px;
+    }
+
+}
+
+
+.flash-message{
+    font-style: italic;
+    color: red;
+    text-align: center;
+}

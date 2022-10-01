@@ -4,11 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User</title>
+    <link rel="stylesheet" href="/dashboard.css">
 </head>
 <body>
+    <div class="container">
 
-    <h1>Welcome to dashboard <%= name %></h1>
-    
+        <div class="header">
+           <h2>  <%= firstName.substring(0,1) %>  </h2>
+           <p>Hello, <%= firstName %>  </p>
+           <a href="/logout"><img title="logout" src="images/x-button.png" width="30px"></a>
+           
+        </div>
+
+        <%- include("./partials/messages") -%>
+
+        <div class="segments">
+            <div class="first">
+                <img id="profile" title="profile" src="images/x-button.png" width="30px">
+                <img id="dashboard" title="dashboard" src="images/x-button.png" width="30px">
+                <!-- <img id="settings" title="settings" src="images/x-button.png" width="30px">  
+                        -->
+                        <a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Freepik - Flaticon</a>
+            </div>
+
+            <div class="second">
+                <div class="profile">
+                      <h3>My Profile</h3>
+                      <p>Registered Name : <span> <%= firstName %> <%= lastName %>  </span> </p>   
+                      <p>Registered Mail : <span> <%= email %>  </span> </p>   
+                      <p>Address : <span>Camp Apakila</span></p>   
+                      <p>Date of Reg : <span>
+                        
+                        <% const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ] %> 
+                    
+             <%= ` ${monthNames[dateOfReg.getMonth()]} ${dateOfReg.getDate()}, ${dateOfReg.getFullYear()}` %> 
+
+                    </span></p>   
+                </div>
+
+                <div class="dashboard">
+                    <h3> Dashboard Loading . .. ... .... ..... ...... </h3>
+                    <p>Just testing the skills, we scale up later</p>
+                    <p>The height that great people reach is not a sudden flight, <br>
+                      while others sleep,they burn their night oil
+                    </p>
+
+                </div>
+
+                <div class="changepassword">
+                    <h3>Reset Password</h3>
+                    <p class="info"></p>
+                    <form action="/dashboard" method="post">
+                    <div class="form-group">
+                        <input required class="old_password" placeholder="Enter Current Password" type="password" name="oldPassword" >
+                        <img class="currentPass js" src="images/show.png" width="20px">
+                    </div>
+
+                    <div class="form-group">
+                        <input  required class="new_password" placeholder="Enter New Password" type="password" >
+                        <img class="newPass js" src="images/show.png" width="20px">
+                    </div>
+
+                    <div class="form-group">
+                        <input required class="confirm_new" placeholder="Confirm New Password" type="password" name="newPassword">
+                        <img class="confirmPass js" src="images/show.png" width="20px">
+                    </div>
+
+                    <button id="submit_btn" type="submit">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
