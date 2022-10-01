@@ -133,9 +133,26 @@ button{
 /* Js Added classes */
 .visible {
     display: block;
+    
 }
 .invisible {
   display: none;   
+}
+
+.active{
+    animation: activeness 3.5s infinite;
+}
+
+@keyframes activeness {
+       0%{opacity: .3;
+            background-color: azure};
+
+        30%{opacity: .5;
+                background-color: grey};
+         70%{opacity: .7;
+                    background-color: azure};
+       100%{opacity: 1;
+           background-color: grey;}
 }
 
 .form-group img.active{

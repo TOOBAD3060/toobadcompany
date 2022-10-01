@@ -19,6 +19,7 @@ const dashboard= document.querySelector(".dashboard");
 
 window.addEventListener("DOMContentLoaded",()=>{
     profile.classList.add("visible")
+    profileBtn.classList.add("active")
     changepassword.classList.add("invisible")
     dashboard.classList.add("invisible")
 })
@@ -31,6 +32,10 @@ profileBtn.addEventListener("click",()=>{
    profile.classList.remove("invisible");
    changepassword.classList.remove("visible");
    dashboard.classList.remove("visible")
+
+   profileBtn.classList.add("active");
+   settingsBtn.classList.remove("active");
+   dashboardBtn.classList.remove("active");
 })
 
 settingsBtn.addEventListener("click",()=>{
@@ -41,6 +46,10 @@ settingsBtn.addEventListener("click",()=>{
    profile.classList.remove("visible");
    changepassword.classList.remove("invisible");
    dashboard.classList.remove("visible")
+
+   profileBtn.classList.remove("active");
+   settingsBtn.classList.add("active");
+   dashboardBtn.classList.remove("active");
 })
 
 dashboardBtn.addEventListener("click",()=>{
@@ -51,6 +60,10 @@ dashboardBtn.addEventListener("click",()=>{
     profile.classList.remove("visible");
     changepassword.classList.remove("visible");
     dashboard.classList.remove("invisible")
+
+    profileBtn.classList.remove("active");
+   settingsBtn.classList.remove("active");
+   dashboardBtn.classList.add("active");
 })
 
 
