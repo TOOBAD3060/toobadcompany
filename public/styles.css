@@ -80,7 +80,7 @@ span.rememberText{
 
 /* verification page */
 div.container.verify{
-    background-color:  rgb(0, 150,10);
+    background-color:  rgb(0, 180,0);
     box-shadow: none
 }
 input.verify{
@@ -91,6 +91,7 @@ input.verify{
     text-align: center;
     outline: none;
     margin: 2px;
+    height: 27px;
 }
 button.verifyBtn{
     width: 40%;

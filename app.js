@@ -378,7 +378,7 @@ User.findOne({email:req.user.email},(err,foundUser)=>{
              console.log(err)
             }
             if (isMatch) {
-                console.log("On it.......")
+                
                 bcrypt.hash(newPassword,saltRounds,(err,hash)=>{
                     foundUser.password = hash;
                     foundUser.save((err)=>{
@@ -405,50 +405,6 @@ User.findOne({email:req.user.email},(err,foundUser)=>{
         })
     }
 })
-
-    // bcrypt.compare(oldPassword,req.user.password,(err,isMatch)=>{
-    //     if (err){
-    //         console.log(err)
-    //     }
-    //     if (isMatch){
-
-            
-    //             User.findOne({email:req.user.email},(err,foundUser)=>{
-    //                 if(err){
-    //                     console.log(err)
-    //                 }
-    //                 if(foundUser){
-    //                  bcrypt.hash(newPassword,saltRounds,(err,hash)=>{
-    //                     foundUser.password = hash;
-    //                     foundUser.save((err)=>{
-    //                         if(!err){
-    //                             console.log("successfully change")
-    //                             res.redirect("/login")
-    //                         }
-    //                     })
-    //                  })
-    //                 }
-
-                    
-    //             })
-    //         }
-    //         else{
-    //             res.render("dashboard",{firstName:req.user.firstName,
-    //                 lastName: req.user.lastName,
-    //                 email: req.user.email,
-    //                 dateOfReg : req.user.date,
-    //                 confirmation : "Oldpassword is incorrect"
-    //                }
-    //      )
-    //         }
-                
-            // })
-        
-           
-                
-
-        
-    
     })
        
         //logout hande

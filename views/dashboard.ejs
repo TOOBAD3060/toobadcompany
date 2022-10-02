@@ -31,7 +31,7 @@
                       <h3>My Profile</h3>
                       <p>Registered Name : <span> <%= firstName %> <%= lastName %>  </span> </p>   
                       <p>Registered Mail : <span> <%= email %>  </span> </p>   
-                      <p>Address : <span>Camp Apakila</span></p>   
+                      <!-- <p>Address : <span>Cam</span> <button>Edit</button> </p>    -->
                       <p>Date of Reg : <span>
                         
                         <% const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ] %> 
@@ -60,12 +60,12 @@
                     </div>
 
                     <div class="form-group">
-                        <input  required class="new_password" placeholder="Enter New Password" type="password" >
+                        <input minlength="6" maxlength="8" required class="new_password" placeholder="Enter New Password" type="password" >
                         <img class="newPass js" src="images/show.png" width="20px">
                     </div>
 
                     <div class="form-group">
-                        <input required class="confirm_new" placeholder="Confirm New Password" type="password" name="newPassword">
+                        <input minlength="6" maxlength="8" required class="confirm_new" placeholder="Confirm New Password" type="password" name="newPassword">
                         <img class="confirmPass js" src="images/show.png" width="20px">
                     </div>
 
