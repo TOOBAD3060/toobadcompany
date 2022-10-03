@@ -279,7 +279,7 @@ app.post("/verify",(req,res)=>{
                 foundUser.save((err)=>{
                     if(!err){
                         console.log("New changes made")
-                        res.render("verificationSuccess")
+                        res.redirect("/login")
                     }
                 })
             }
