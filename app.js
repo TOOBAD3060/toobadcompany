@@ -174,7 +174,7 @@ console.log(randomToken)
                          from : ` "Verify your email" <olalerebabatunde2000@gmail.com>` ,
                          to : newUser.email,
                          subject : 'TOOBAD Technologies - Verify your email' ,
-                         text:` Dear ${newUser.lastName}, Kindly use ${newUser.emailToken} for your verification`
+                         text:` Dear ${newUser.lastName},we're excited you've joined us! Kindly use ${newUser.emailToken} for your verification`
                         }
             
             //   Sending Mail
